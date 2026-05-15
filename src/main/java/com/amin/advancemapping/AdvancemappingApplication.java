@@ -1,5 +1,6 @@
 package com.amin.advancemapping;
 
+import com.amin.advancemapping.entity.Course;
 import com.amin.advancemapping.entity.Instructor;
 import com.amin.advancemapping.entity.InstructorDetail;
 import com.amin.advancemapping.repository.AppDAO;
@@ -27,7 +28,23 @@ public class AdvancemappingApplication {
 //			findInstructorDetail(appDAO);
 
  	//	deleteInstructorDetailById(appDAO);
+			createInstructorWithCourses(appDAO);
         };
+	}
+
+	private void createInstructorWithCourses(AppDAO appDAO) {
+		Instructor instructor = new Instructor("Aslan", "Mamedov", "aslan@gmail.com");
+		InstructorDetail instructorDetail = new InstructorDetail("aslan.mamedov/youtube", "judo");
+		instructor.setInstructorDetail(instructorDetail);
+
+		Course course = new Course("Programming");
+		Course course2 = new Course("Guitar");
+		instructor.addCourse(course);
+		instructor.addCourse(course2);
+
+		appDAO.save(instructor);
+
+		System.out.println("Done");
 	}
 
 	private void deleteInstructorDetailById(AppDAO appDAO) {
