@@ -24,8 +24,16 @@ public class AdvancemappingApplication {
 
 //			deleteInstructor(appDAO);
 
-			findInstructorDetail(appDAO);
+//			findInstructorDetail(appDAO);
+
+ 	//	deleteInstructorDetailById(appDAO);
         };
+	}
+
+	private void deleteInstructorDetailById(AppDAO appDAO) {
+		int id =3;
+		appDAO.deleteInstructorDetailbyId(2);
+
 	}
 
 	private void findInstructorDetail(AppDAO appDAO) {
@@ -35,8 +43,6 @@ public class AdvancemappingApplication {
 
 		System.out.println("InstructorDetail: " + instructorDetail);
 		System.out.println("the associated instructor" + instructorDetail.getInstructor());
-
-
 	}
 
 	private void deleteInstructor(AppDAO appDAO) {
@@ -57,23 +63,23 @@ public class AdvancemappingApplication {
 	private void saveInstructor(AppDAO appDAO) {
 
 
-		/*Instructor instructor = new Instructor("Amin", "Badalzade", "aminbadalov32@gmail.com");
+		Instructor instructor = new Instructor("Amin", "Badalzade", "aminbadalov32@gmail.com");
 
 		InstructorDetail instructorDetail = new InstructorDetail(
 				"http://www.amin.com", "coding");
 
 		instructor.setInstructorDetail(instructorDetail);
-		*/
+		appDAO.save(instructor);
 
-		Instructor instructor = new Instructor("Emin", "Badalzade", "eminbadalov@gmail.com");
+		Instructor instructor1 = new Instructor("Emin", "Badalzade", "eminbadalov@gmail.com");
 
-		InstructorDetail instructorDetail = new InstructorDetail(
+		InstructorDetail instructorDetail1 = new InstructorDetail(
 				"http://www.emin.com", "coding");
 
-		instructor.setInstructorDetail(instructorDetail);
+		instructor.setInstructorDetail(instructorDetail1);
 
 		//this will also save the details object becasue of cascadetype.all
-		appDAO.save(instructor);
+		appDAO.save(instructor1);
 	}
 
 
