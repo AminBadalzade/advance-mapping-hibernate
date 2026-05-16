@@ -1,9 +1,11 @@
 package com.amin.advancemapping.repository;
 
+import com.amin.advancemapping.entity.Course;
 import com.amin.advancemapping.entity.Instructor;
 import com.amin.advancemapping.entity.InstructorDetail;
 
 import java.beans.Introspector;
+import java.util.List;
 
 public interface AppDAO {
 
@@ -16,4 +18,8 @@ public interface AppDAO {
     InstructorDetail findInstructorDetailById(int id);
 
     void deleteInstructorDetailbyId(int id);
+
+     List<Course> findCoursesByInstructorId(int id);
+
+     Instructor findInstructorByIdJoinFetch(int id);
 }
