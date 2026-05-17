@@ -103,7 +103,6 @@ public class Course {
     public String toString() {
         return "Course{" +
                 "title='" + title + '\'' +
-                ", instructor=" + instructor +
                 ", id=" + id +
                 '}';
     }

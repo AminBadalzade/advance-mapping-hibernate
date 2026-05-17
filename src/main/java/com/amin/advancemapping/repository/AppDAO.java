@@ -3,6 +3,7 @@ package com.amin.advancemapping.repository;
 import com.amin.advancemapping.entity.Course;
 import com.amin.advancemapping.entity.Instructor;
 import com.amin.advancemapping.entity.InstructorDetail;
+import com.amin.advancemapping.entity.Student;
 
 import java.beans.Introspector;
 import java.util.List;
@@ -37,4 +38,9 @@ public interface AppDAO {
 
      Course findCourseAndStudents(int id);
 
+     Student findStudentAndCourses(int id);
+
+     void updateStudent(Student student);
+
+     void deleteStudentById(int id);
 }

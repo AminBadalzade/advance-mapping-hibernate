@@ -2,6 +2,7 @@ package com.amin.advancemapping;
 
 import com.amin.advancemapping.entity.*;
 import com.amin.advancemapping.repository.AppDAO;
+import com.amin.advancemapping.repository.AppDAOImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +18,7 @@ public class AdvancemappingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AppDAO appDAO){
+	public CommandLineRunner commandLineRunner(AppDAO appDAO, AppDAOImpl appDAOImpl){
         return runner -> {
 //			saveInstructor(appDAO);
 
@@ -44,8 +45,37 @@ public class AdvancemappingApplication {
 
 //			createCourseAndStudent(appDAO);
 
-			findCourseAndStudent(appDAO);
-        };
+//			findCourseAndStudent(appDAO);
+//			findStudentAndCourses(appDAO);
+//        	addMoreCoursesForStudent(appDAO);
+
+			deleteStudent(appDAO);
+		};
+	}
+
+	private void deleteStudent(AppDAO appDAO) {
+		int id = 1;
+		appDAO.deleteStudentById(id);
+
+	}
+
+	private void addMoreCoursesForStudent(AppDAO appDAO) {
+		int id = 2;
+		Student student = appDAO.findStudentAndCourses(id);
+
+		Course course1 = new Course("CSGO");
+		Course course2 = new Course("Point Blank");
+		student.addCourse(course1);
+		student.addCourse(course2);
+		appDAO.updateStudent(student);
+	}
+
+	private void findStudentAndCourses(AppDAO appDAO) {
+		int id = 2;
+		Student student = appDAO.findStudentAndCourses(id);
+		System.out.println(student);
+
+		System.out.println(student.getCourses());
 	}
 
 	private void findCourseAndStudent(AppDAO appDAO) {
@@ -89,7 +119,7 @@ public class AdvancemappingApplication {
 	}
 
 	private void deleteCourse(AppDAO appDAO) {
-		int id =12;
+		int id =13;
 		appDAO.deleteCourseById(id);
 		System.out.println("Done");
 	}

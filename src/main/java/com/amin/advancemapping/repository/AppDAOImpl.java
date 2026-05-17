@@ -3,6 +3,7 @@ package com.amin.advancemapping.repository;
 import com.amin.advancemapping.entity.Course;
 import com.amin.advancemapping.entity.Instructor;
 import com.amin.advancemapping.entity.InstructorDetail;
+import com.amin.advancemapping.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
@@ -127,6 +128,36 @@ public class AppDAOImpl implements AppDAO {
         query.setParameter("id", id);
         Course course = query.getSingleResult();
         return course;
+    }
+
+    @Transactional
+    @Override
+    public Student findStudentAndCourses(int id) {
+        TypedQuery<Student> query = entityManager.createQuery("SELECT s from Student s JOIN FETCH s.courses WHERE s.id = :id", Student.class);
+        query.setParameter("id", id);
+        Student student = query.getSingleResult();
+        return student;
+    }
+
+    @Transactional
+    @Override
+    public void updateStudent(Student student) {
+        entityManager.merge(student);
+    }
+
+    @Transactional
+    @Override
+    public void deleteStudentById(int id) {
+        Student student = entityManager.find(Student.class, id);
+        if(student != null){
+            List<Course> courses = student.getCourses();
+
+            for(Course course :courses){
+                course.getStudents().remove(student);
+            }
+
+            entityManager.remove(student);
+        }
     }
 
 
