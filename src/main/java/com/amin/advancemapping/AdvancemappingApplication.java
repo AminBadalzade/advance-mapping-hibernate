@@ -3,6 +3,7 @@ package com.amin.advancemapping;
 import com.amin.advancemapping.entity.Course;
 import com.amin.advancemapping.entity.Instructor;
 import com.amin.advancemapping.entity.InstructorDetail;
+import com.amin.advancemapping.entity.Review;
 import com.amin.advancemapping.repository.AppDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,9 +35,62 @@ public class AdvancemappingApplication {
 
 //			findInstructorWithCourses(appDAO);
 //			findCourseByInstructorId(appDAO);
+//          findInstructorWithCoursesJoinFetch(appDAO);
+     		//  updateInstructor(appDAO);
+//			updateCourse(appDAO);
+//			deleteInstructor(appDAO);
+			//deleteCourse(appDAO);
+		//	createCourseAndReviews(appDAO);
+//			getCourseAndReviews(appDAO);
 
-			findInstructorWithCoursesJoinFetch(appDAO);
+			deleteCourse(appDAO);
         };
+	}
+
+	private void getCourseAndReviews(AppDAO appDAO) {
+		int id = 12;
+	Course course =	appDAO.getCourse(12);
+		System.out.println(course);
+		System.out.println(course.getReviews());
+
+	}
+
+	private void createCourseAndReviews(AppDAO appDAO) {
+
+		Course course = new Course("Problem-solving");
+		course.add(new Review("So goood"));
+		course.add(new Review("So amazing"));
+		course.add(new Review("So badd"));
+
+		appDAO.saveCourse(course);
+		System.out.println("Done");
+
+	}
+
+	private void deleteCourse(AppDAO appDAO) {
+		int id =12;
+		appDAO.deleteCourseById(id);
+		System.out.println("Done");
+	}
+
+	private void updateCourse(AppDAO appDAO) {
+		int theId = 10;
+		Course course = appDAO.findCourseById(theId);
+
+		course.setTitle("Enjoy simple things!");
+		appDAO.update(course);
+
+		System.out.println("DOne");
+	}
+
+	private void updateInstructor(AppDAO appDAO) {
+		int id = 1;
+		Instructor instructor = appDAO.getInstructorById(id);
+		instructor.setLastName("TESTER");
+
+		appDAO.update(instructor);
+
+		System.out.println("Done");
 	}
 
 	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
