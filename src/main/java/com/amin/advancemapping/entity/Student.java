@@ -68,6 +68,9 @@ public class Student {
     }
 
     public List<Course> getCourses() {
+        if(courses == null){
+            courses = new ArrayList<>();
+        }
         return courses;
     }
 
@@ -76,9 +79,6 @@ public class Student {
     }
 
     public void addCourse(Course course){
-        if(courses == null){
-            courses = new ArrayList<>();
-        }
 
         course.addStudent(this);
     }
@@ -90,7 +90,6 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", courses=" + courses +
                 '}';
     }
 }

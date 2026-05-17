@@ -1,9 +1,6 @@
 package com.amin.advancemapping;
 
-import com.amin.advancemapping.entity.Course;
-import com.amin.advancemapping.entity.Instructor;
-import com.amin.advancemapping.entity.InstructorDetail;
-import com.amin.advancemapping.entity.Review;
+import com.amin.advancemapping.entity.*;
 import com.amin.advancemapping.repository.AppDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -43,8 +40,32 @@ public class AdvancemappingApplication {
 		//	createCourseAndReviews(appDAO);
 //			getCourseAndReviews(appDAO);
 
-			deleteCourse(appDAO);
+//			deleteCourse(appDAO);
+
+//			createCourseAndStudent(appDAO);
+
+			findCourseAndStudent(appDAO);
         };
+	}
+
+	private void findCourseAndStudent(AppDAO appDAO) {
+		int id = 13;
+		Course course = appDAO.findCourseAndStudents(id);
+		System.out.println(course);
+
+		System.out.println(course.getStudents());
+	}
+
+	private void createCourseAndStudent(AppDAO appDAO) {
+		Course course = new Course("Physics");
+
+		Student student1 = new Student("Amin", "Badalzade", "ab@gmail.com");
+		Student student2 = new Student("Emin", "Badalzade", "eb@gmail.com");
+		Student student3 = new Student("Nermin", "Badalzade", "nb@gmail.com");
+		course.addStudent(student1);
+		course.addStudent(student2);
+		course.addStudent(student3);
+		appDAO.saveCourse(course);
 	}
 
 	private void getCourseAndReviews(AppDAO appDAO) {

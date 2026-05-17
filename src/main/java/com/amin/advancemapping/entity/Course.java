@@ -73,6 +73,14 @@ public class Course {
         this.reviews = reviews;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
     public void add(Review review){
         if(reviews == null){
             reviews = new ArrayList<>();
@@ -90,4 +98,13 @@ public class Course {
         student.getCourses().add(this);
     }
 
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "title='" + title + '\'' +
+                ", instructor=" + instructor +
+                ", id=" + id +
+                '}';
+    }
 }

@@ -4,6 +4,7 @@ import com.amin.advancemapping.entity.Course;
 import com.amin.advancemapping.entity.Instructor;
 import com.amin.advancemapping.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,14 @@ public class AppDAOImpl implements AppDAO {
       return  course;
     }
 
+    @Transactional
+    @Override
+    public Course findCourseAndStudents(int id) {
+        TypedQuery<Course> query = entityManager.createQuery("SELECT c from Course c JOIN FETCH c.students WHERE c.id = :id", Course.class);
+        query.setParameter("id", id);
+        Course course = query.getSingleResult();
+        return course;
+    }
 
 
 }
